@@ -34,11 +34,15 @@ def format_date_string(d: str):
 def ui_date(d: datetime):
     return datetime.strftime(d, '%b %d, %Y')
 
-def str_to_datetime_obj(d: str) -> datetime:
-    if d == "0000-00-00":
-        d = "1980-01-01"
-    return datetime.strptime(d, "%Y-%m-%d")
-
+ddef str_to_datetime_obj(d: str) -> datetime | None:
+    try:
+        if not d or d.strip() == "" or d.startswith("0000"):
+            logger.warning(f"[dates] Fecha inválida detectada ('{d}'), usando 1980-01-01 como valor predeterminado.")
+            return datetime.strptime("1980-01-01", "%Y-%m-%d")
+        return datetime.strptime(d, "%Y-%m-%d")
+    except Exception as e:
+        logger.error(f"[dates] Error al convertir fecha '{d}': {e}")
+        return None
 
 def get_friendly_date(d: int):
     input_date = datetime.fromtimestamp(d).date()
