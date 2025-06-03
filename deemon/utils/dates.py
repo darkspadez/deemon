@@ -37,8 +37,8 @@ def ui_date(d: datetime):
 ddef str_to_datetime_obj(d: str) -> datetime | None:
     try:
         if not d or d.strip() == "" or d.startswith("0000"):
-            logger.warning(f"[dates] Fecha inválida detectada ('{d}'), usando 1980-01-01 como valor predeterminado.")
-            return datetime.strptime("1980-01-01", "%Y-%m-%d")
+            logger.warning(f"[dates] Invalid date detected ('{d}'), using 1900-01-01 as default value.")
+            return datetime.strptime("1900-01-01", "%Y-%m-%d")
         return datetime.strptime(d, "%Y-%m-%d")
     except Exception as e:
         logger.error(f"[dates] Error al convertir fecha '{d}': {e}")
