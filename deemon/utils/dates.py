@@ -34,7 +34,7 @@ def format_date_string(d: str):
 def ui_date(d: datetime):
     return datetime.strftime(d, '%b %d, %Y')
 
-ddef str_to_datetime_obj(d: str) -> datetime | None:
+def str_to_datetime_obj(d: str) -> datetime | None:
     try:
         if not d or d.strip() == "" or d.startswith("0000"):
             logger.warning(f"[dates] Invalid date detected ('{d}'), using 1900-01-01 as default value.")
